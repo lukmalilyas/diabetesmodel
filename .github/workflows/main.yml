@@ -26,7 +26,7 @@ jobs:
       - name: Build, tag, and push image to Microsoft ACR
         env:
           ACR_REGISTRY: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          ACR_REPOSITORY: ${{ secrets.Microsoft_ACR_REPOSITORY }}
+          ACR_REPOSITORY: ${{ secrets.MICROSOFT_ACR_REPOSITORY }}
           IMAGE_TAG: ${{ github.event.inputs.deployment_type }}
         run: |
           docker build -f ./app_folder/Dockerfile -t $ACR_REGISTRY/$ACR_REPOSITORY:$IMAGE_TAG .
