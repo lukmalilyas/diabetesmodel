@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  fastapiapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: diabetes-container
+    image: diabetesmodel
+    restart: always
+    ports:
+      - '80:80'
+    volumes:
+      - .:/app

@@ -2,6 +2,7 @@ import json
 import pickle
 from fastapi import FastAPI
 from pydantic import BaseModel
+import uvicorn
 
 
 app = FastAPI()
@@ -46,3 +47,6 @@ def diabetes_pred(input_parameters: ModelInput):
         result = {"label": 1,
                   "result": "The person is diabetic"}
         return result
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
