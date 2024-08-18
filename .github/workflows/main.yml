@@ -19,7 +19,7 @@ jobs:
         id: login-acr
         uses: azure/docker-login@v1
         with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          login-server: lukmal.azurecr.io
           username: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
