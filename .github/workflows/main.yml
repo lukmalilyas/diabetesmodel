@@ -1,0 +1,36 @@
+name: Docker Build & Push to Microsoft ACR
+
+
+on:
+    workflow_dispatch:
+        inputs:
+          deployment_type: 
+          image_tag:
+          
+
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latest
+    
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v3
+              
+
+            - name: Login to Mircrosoft ACR
+              id: login-acr
+              uses: azure/docker-login@v1
+              with:
+                login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+                username: ${{ secrets.REGISTRY_USERNAME }}
+                password: ${{ secrets.REGISTRY_PASSWORD }}
+
+
+            - name: Build, tag, and push image to Microsoft ACR
+              env:
+                ACR_REGISTRY : ${{ secrets.REGISTRY_LOGIN_SERVER }}
+                ACR_REPOSITORY:  ${{ secrets.Mirosoft_ACR_REPOSITORY }}
+                IMAGE_TAG: ${{ github.event.inputs.deployment_type }}_${{ github.event.inputs.image_tag }}
+            - run: |
+                docker build -f ./app_folder/Dockerfile -t $ACR_REGISTRY/$ACR_REPOSITORY:$IMAGE_TAG .
+                docker push $ACR_REGISTRY/$ACR_REPOSITORY:$IMAGE_TAG
