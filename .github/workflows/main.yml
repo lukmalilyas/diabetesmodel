@@ -19,9 +19,9 @@ jobs:
         id: login-acr
         uses: azure/docker-login@v1
         with:
-          login-server: lukmal.azurecr.io
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: mWVJkXhprY0rbxa2cPywzXvxqnY9RkL1mBKJwxvy/B+ACRAXY33i
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Build, tag, and push image to Microsoft ACR
         env:
