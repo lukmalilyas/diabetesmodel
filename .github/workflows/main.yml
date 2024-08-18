@@ -15,19 +15,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Debug print env variables
-        run: |
-          echo "ACR_REGISTRY=$ACR_REGISTRY"
-          echo "ACR_REPOSITORY=$ACR_REPOSITORY"
-          echo "IMAGE_TAG=$IMAGE_TAG"
-
-      
       - name: Login to Microsoft ACR
         id: login-acr
         uses: azure/docker-login@v1
         with:
           login-server: lukmal.azurecr.io
-          username: lukmal
+          username: ${{ secrets.REGISTRY_USERNAME }}
           password: mWVJkXhprY0rbxa2cPywzXvxqnY9RkL1mBKJwxvy/B+ACRAXY33i
 
       - name: Build, tag, and push image to Microsoft ACR
