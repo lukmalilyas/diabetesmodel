@@ -29,6 +29,5 @@ jobs:
           ACR_REPOSITORY: ${{ secrets.Microsoft_ACR_REPOSITORY }}
           IMAGE_TAG: ${{ github.event.inputs.deployment_type }}
         run: |
-          echo "$ACR_REGISTRY/$ACR_REPOSITORY:$IMAGE_TAG"
-          docker build -f ./app_folder/Dockerfile -t lukmal.azurecr.io/diabetesmodel:latest .
-          docker push lukmal.azurecr.io/diabetesmodel:latest
+          docker build -f ./app_folder/Dockerfile -t $ACR_REGISTRY/$ACR_REPOSITORY:$IMAGE_TAG .
+          docker push $ACR_REGISTRY/$ACR_REPOSITORY:$IMAGE_TAG
